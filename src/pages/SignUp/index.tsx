@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PageArea } from './styled'
 import { ErrorMessage, PageContainer, PageTitle } from "../../components/MainComponents";
 import OlxAPI from '../../helpers/OlxAPI'
@@ -8,9 +8,14 @@ const SignIn = () => {
 
     const api = OlxAPI();
 
+
+    const [name, setName] = useState('')
+    const [stateLoc, setStateLoc] = useState('')
+    const [stateList, setStateList] = useState([]) 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [rememberPassword, setRememberPassword] = useState(false)
+    const [confirmPassword, setConfirmPassword] = useState('')
+
     const [disabled, setDisabled] = useState(false)
     const [error, setError] = useState('')
 
@@ -19,22 +24,45 @@ const SignIn = () => {
         setDisabled(true);
         setError('');
 
-        const json = await api.login(email, password)
+        if(password !== confirmPassword){
+            setError('As senhas não são iguais');
+            setDisabled(false);
+            return;
+        }
 
-        if(json.error){
-            setError(json.error)
+        const json = await api.register(
+            name,
+            email,
+            password,
+            stateLoc
+        );
+
+        if(json.error) {
+            setError(json.error);
         } else {
-            doLogin(json.token, rememberPassword)
-            window.location.href = '/';
+            doLogin(json.token);
+            window.location.href = '/'
         }
 
         setDisabled(false);
-        
+    }
+
+    useEffect(()=>{
+        const getStates = async () => {
+            const slist = await api.getStates();
+            setStateList(slist);
+        }
+        getStates();
+    }, [])
+
+    type State = {
+        _id: number,
+        name: string
     }
 
     return(
         <PageContainer>
-            <PageTitle>Login</PageTitle>
+            <PageTitle>Cadastro</PageTitle>
             <PageArea>
                 {error &&
                 <>
@@ -42,6 +70,33 @@ const SignIn = () => {
                 </>
                 }
                 <form onSubmit={handleSubmit}>
+                    <label className="area">
+                        <div className="area--title">Nome</div>
+                        <div className="area--input">
+                            <input
+                            type="text"
+                            disabled={disabled}
+                            value={name}
+                            onChange={e=>setName(e.target.value)}
+                            required
+                            />
+                        </div>
+                    </label>
+                    <label className="area">
+                        <div className="area--title">Estado</div>
+                        <div className="area--input">
+                            <select 
+                            required
+                            disabled={disabled}
+                            value={stateLoc}
+                            onChange={e=>{setStateLoc(e.target.value)}}
+                            >
+                            {stateList.map((i:State,k)=>
+                            <option key={k} value={i._id}>{i.name}</option>
+                            )}
+                            </select>
+                        </div>
+                    </label> {stateLoc}
                     <label className="area">
                         <div className="area--title">E-mail</div>
                         <div className="area--input">
@@ -67,21 +122,20 @@ const SignIn = () => {
                         </div>
                     </label>
                     <label className="area">
-                        <div className="area--title">Lembrar senha</div>
+                        <div className="area--title">Confirmar senha</div>
                         <div className="area--input">
                             <input
-                            className='check'
-                            type="checkbox"
+                            type="password"
                             disabled={disabled}
-                            defaultChecked={rememberPassword}
-                            onChange={()=>setRememberPassword(!rememberPassword)}
+                            value={confirmPassword}
+                            onChange={e=>setConfirmPassword(e.target.value)}
                             />
                         </div>
                     </label>
                     <label className="area">
                         <div className="area--title"></div>
                         <div className="area--input">
-                            <button disabled={disabled}>Fazer Login</button>
+                            <button disabled={disabled}>Fazer Cadastro</button>
                         </div>
                     </label>
                 </form>
