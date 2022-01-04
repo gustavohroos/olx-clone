@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Item = styled.div`
+
+    
     a{
         display: block;
         background-color: #fff;
@@ -22,7 +24,13 @@ export const Item = styled.div`
 
         .itemName {
             color: #000;
+            padding: 5px 0;
+        }
+
+        .itemPrice {
+            color: #000;
             font-weight: bold;
+            padding: 5px 0;
         }
     }
 

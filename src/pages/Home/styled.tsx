@@ -10,7 +10,7 @@ export const PageArea = styled.div`
         flex-wrap: wrap;
 
         .item {
-            width: 20%;
+            width: 25%;
         }
 
     }

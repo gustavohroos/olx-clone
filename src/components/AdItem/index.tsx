@@ -16,7 +16,7 @@ export default (props:Props) => {
     let price = '';
 
     if(props.data.priceNegotiable){
-        price = `Preço negociável por volta de R$ ${props.data.price} `
+        price = `Preço negociável (R$${props.data.price}) `
     } else {
         price = `R$ ${props.data.price}`
     }
@@ -27,7 +27,7 @@ export default (props:Props) => {
                     <img className='itemImage' src={props.data.image} alt=''/>
                 </div>
                 <div className='itemName'>
-                    {props.data.title.toUpperCase()}
+                    {props.data.title}
                 </div>
                 <div className='itemPrice'>
                     {price}
