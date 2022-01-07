@@ -16,7 +16,9 @@ type BodyGet = {
     email?: string,
     token?: string,
     sort?: string,
-    limit?: number
+    limit?: number,
+    id?: string,
+    other?: boolean
 }
 
 const initialState = {
@@ -109,6 +111,14 @@ const OlxAPI =  {
         const json = await apiFetchGet("/ad/list",
         options
         );
+        return json;
+    },
+
+    getAd: async (id:string, otherAds = false) => {
+        const json = await apiFetchGet(
+            '/ad/item',
+            {id, other:otherAds}
+        )
         return json;
     }
 }
