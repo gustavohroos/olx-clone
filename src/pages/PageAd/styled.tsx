@@ -24,6 +24,12 @@ export const PageArea = styled.div`
         padding: 10px;
     }
 
+    .name--box {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+
     .leftSide {
         flex: 1;
         margin-right: 20px;
