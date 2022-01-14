@@ -32,6 +32,25 @@ export const SearchArea = styled.div`
     background-color: #6e0ad6;
     border-bottom: #CCC;
     padding: 20px 0;
+
+    .toTop{
+        padding: 10px;
+        padding-top: 14px;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        background-color: #6e0ad6;
+        z-index: 999;
+        cursor: pointer;
+        text-align: center;
+
+        img {
+            width: 30px;
+        }
+    }
     
 
 

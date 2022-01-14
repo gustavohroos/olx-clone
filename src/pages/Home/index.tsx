@@ -13,6 +13,7 @@ const SignIn = () => {
     const [stateList, setStateList] = useState([])
     const [categoriesList, setCategoriesList] = useState([])
     const [recentAds, setRecentAds] = useState([])
+    const [toTopButton, setToTopButton] = useState(false)
 
     useEffect(()=>{
         const getStates = async () => {
@@ -34,12 +35,24 @@ const SignIn = () => {
         const getRecentAds = async () => {
             const json = await api.getAds({
                 sort: 'desc',
-                limit: 20
+                limit: 28
             });
             setRecentAds(json.ads);
         }
         getRecentAds();
     }, [])
+
+    useEffect(()=>{
+        const checkScroll = () => {
+            if (window.scrollY == 0) {
+                setToTopButton(false);
+            } else if (window.scrollY > 0) {
+                setToTopButton(true);
+            }
+        }
+        checkScroll();
+        window.addEventListener("scroll", checkScroll);
+    },[])
 
     type State = {
         _id: number,
@@ -60,10 +73,23 @@ const SignIn = () => {
         title:string
     }
 
+    function goTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
+
     return(
         <>
             <SearchArea>
                 <PageContainer>
+                    {toTopButton &&
+                        <div onClick={goTop} className="toTop">
+                            <img src="src\media\arrowTop.png" alt="" />
+                        </div>
+                    }
+                    
                     <div className="searchBox">
                         <form method="GET" action="/ads">
                           <input type='text' name='q' placeholder='Estou procurando por...'/>
