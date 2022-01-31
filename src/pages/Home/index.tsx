@@ -44,7 +44,7 @@ const SignIn = () => {
 
     useEffect(()=>{
         const checkScroll = () => {
-            if (window.scrollY == 0) {
+            if (window.scrollY === 0) {
                 setToTopButton(false);
             } else if (window.scrollY > 0) {
                 setToTopButton(true);
