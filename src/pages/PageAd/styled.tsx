@@ -17,7 +17,7 @@ export const PageArea = styled.div`
         background-color: #fff;
         border-radius: 5px;
         box-shadow: 0px 0px 4px #999;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     .box--padding {
@@ -100,7 +100,7 @@ export const PageArea = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .createdBy small {
