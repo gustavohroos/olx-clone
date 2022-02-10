@@ -8,6 +8,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import PageAd from './pages/PageAd';
 import AddAd from './pages/AddAd';
+import Ads from './pages/Ads';
 import { RequireAuth } from './helpers/requireAuth';
 
 export default () => {
@@ -27,6 +28,7 @@ export default () => {
             <Route path='/signin' element={<SignIn/>}/>
             <Route path='/signup' element={<SignUp/>}/>
             <Route path='/ad/:id' element={<PageAd/>}/>
+            <Route path='/ads' element={<Ads/>}/>
             <Route path="/404" element={<NotFound/>} />
             <Route path="*" element={<Navigate replace to="/404" />} />
         </Routes>
