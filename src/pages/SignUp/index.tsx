@@ -91,12 +91,13 @@ const SignIn = () => {
                             value={stateLoc}
                             onChange={e=>{setStateLoc(e.target.value)}}
                             >
+                            <option></option>
                             {stateList.map((i:State,k)=>
                             <option key={k} value={i._id}>{i.name}</option>
                             )}
                             </select>
                         </div>
-                    </label> {stateLoc}
+                    </label>
                     <label className="area">
                         <div className="area--title">E-mail</div>
                         <div className="area--input">
