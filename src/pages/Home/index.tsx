@@ -95,7 +95,7 @@ const SignIn = () => {
                           <input type='text' name='q' placeholder='Estou procurando por...'/>
                           <select name='state'>
                             {stateList.map((i:State,k)=>
-                            <option key={k} value={i._id}>{i.name}</option>
+                            <option key={k} value={i.name}>{i.name}</option>
                             )}
                           </select> 
                           <button>Pesquisar</button>
@@ -114,8 +114,10 @@ const SignIn = () => {
             </SearchArea>
             <PageContainer>
                 <PageArea>
-                    <div className="list">
-                        {recentAds.map((i:Ad,k)=>
+                    <div className="list">         
+                        {recentAds
+                        .filter((r: Ad) => (r.image !== 'http://alunos.b7web.com.br:501/media/default.jpg') && (r.title !== 'Robson Careca'))
+                        .map((i:Ad,k)=>
                             <AdItem key={k} data={i}/>
                         )}
                     </div>
