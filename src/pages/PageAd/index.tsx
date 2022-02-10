@@ -43,8 +43,6 @@ const PageAd = () => {
 
     const  { id } = useParams();
 
-    
-
     const [loading, setLoading] = useState(true)
     const [adInfo, setAdInfo] = useState<AdProps>({} as AdProps)
 
