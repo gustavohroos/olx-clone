@@ -43,6 +43,8 @@ const PageAd = () => {
 
     const  { id } = useParams();
 
+    
+
     const [loading, setLoading] = useState(true)
     const [adInfo, setAdInfo] = useState<AdProps>({} as AdProps)
 
@@ -53,7 +55,7 @@ const PageAd = () => {
             setLoading(false);
         }
         getAdInfo(id as string)
-    }, []);
+    }, [id]);
 
     function formatDate(date: string) {
         let cDate = new Date(date);
@@ -151,12 +153,20 @@ const PageAd = () => {
         <OthersArea>
             {adInfo.others &&
                         <>
+                        {adInfo.others.length > 0 &&
+                            <>
                             <h2>Outras ofertas do vendedor</h2>
-                            <div className="list">
-                                {adInfo.others.slice(-4).map((i, k)=> (
+                            <div className="list" onClick={()=>{}}>
+                                {adInfo.others
+                                .filter((r: AdItemProps) => (r.image !== 'http://alunos.b7web.com.br:501/media/default.jpg') && (r.title !== 'Robson Careca'))
+                                .slice(-4)
+                                .map((i, k)=> (
                                     <AdItem key={k} data={i} />
                                 ))}
                             </div>
+                            </>
+                        }
+                            
                         </>
             }
         </OthersArea>
