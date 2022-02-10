@@ -18,7 +18,7 @@ const AddAd = () => {
 
     const api = OlxAPI();
 
-    const fileField = useRef<LegacyRef<HTMLInputElement>>();
+    const fileField = React.useRef() as React.MutableRefObject<HTMLInputElement>;
 
     const [categories, setCategories] = useState([]);
 
@@ -60,9 +60,9 @@ const AddAd = () => {
             fData.append('desc', desc);
             fData.append('cat', category);
 
-            if(fileField.current.files.length > 0){
-                for(let i = 0; i < fileField.current.files.length; i++){
-                    fData.append('img', fileField.current.files[i]);
+            if(fileField.current.files!.length > 0){
+                for(let i = 0; i < fileField.current.files!.length; i++){
+                    fData.append('img', fileField.current.files![i]);
                 }
             }
 
@@ -168,7 +168,7 @@ const AddAd = () => {
                                 type='file'
                                 disabled={disabled}
                                 multiple
-                                ref={fileField as LegacyRef<HTMLInputElement>}
+                                ref={fileField}
                             />
                         </div>
                     </label>
